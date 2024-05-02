@@ -1,0 +1,29 @@
+---
+title: "Temp Analysis"
+author: "Graceson Mule"
+date: "`r Sys.Date()`"
+output: pdf_document
+---
+
+```{r message=FALSE, warning=FALSE}
+library(GracesonMuleFlagWeather)
+library(tidyverse)
+library(patchwork)
+
+
+MinTemps <- ggplot(data = Flagstaff_Weather, aes(x=DATE, y = TMIN)) +
+  geom_line()
+
+SnowFall <- ggplot(data = Flagstaff_Weather, aes(x=DATE, y = SNOW)) +
+  geom_line()
+
+Percipitation <- ggplot(data = Flagstaff_Weather, aes(x=DATE, y = PRCP)) +
+  geom_line()
+
+MaxTemps <- ggplot(data = Flagstaff_Weather, aes(x=DATE, y = TMAX)) +
+  geom_line()
+
+cowplot::plot_grid(MinTemps, MaxTemps, SnowFall, Percipitation, nrow=2, ncol=2, 
+                   labels=c('Min Temps','Max Temps','Snow Fall', 'Percipitation'))
+
+```
